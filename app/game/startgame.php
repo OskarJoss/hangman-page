@@ -11,10 +11,9 @@ $wordList = new WordList($pdo);
 $randomRow = $wordList->getRandomRow();
 $id = $randomRow['id'];
 $word = $randomRow['word'];
-
-//turn word inte displayed word for the front-end.
+$displayedWord = implode(" ", array_fill(0, strlen($word), "_"));
 
 $_SESSION['wordId'] = $id;
-$_SESSION['displayedWord'] = $word;
+$_SESSION['displayedWord'] = $displayedWord;
 
 redirect('/game.php');
