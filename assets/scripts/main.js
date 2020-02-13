@@ -12,10 +12,16 @@ guessForm.addEventListener("submit", e => {
         body: formData
     })
         .then(response => response.json())
-        .then(json => {
-            displayedWord.innerHTML = json;
-            const input = e.target.querySelector("input");
-            input.value = "";
-            input.focus();
+        .then(response => {
+            console.log(response);
+            // if (response.isValidResponse) {
+            //     // displayedWord.innerHTML = response.
+            //     const input = e.target.querySelector("input");
+            //     input.value = "";
+            //     input.focus();
+            //     console.log(response);
+            // } else {
+            //     consol.log("yo");
+            // }
         });
 });
