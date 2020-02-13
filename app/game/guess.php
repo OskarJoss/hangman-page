@@ -11,6 +11,8 @@ if (isset($_POST['guess'])) {
     $displayedLetters = explode(" ", $displayedWord);
     $isCorrectGuess = false;
     $isOldGuess = false;
+    $winGame = false;
+    $loseGame = false;
 
     if (isValidLetter($guess)) {
         foreach ($_SESSION['guessedLetters'] as $guessedLetter) {
@@ -35,11 +37,21 @@ if (isset($_POST['guess'])) {
             $_SESSION['displayedWord'] = $displayedWord;
             $_SESSION['guessedLetters'][] = $guess;
 
+            if ($displayedWord === $word) {
+                $winGame = true;
+            }
+
+            if (count($_SESSION['wrongLetters']) === 11) {
+                $loseGame = true;
+            }
+
             $response = (object) [
                 "isValidResponse" => true,
                 "isCorrectGuess" => $isCorrectGuess,
                 "displayedWord" => $displayedWord,
-                "guess" => strtoupper($guess)
+                "guess" => strtoupper($guess),
+                "winGame" => $winGame,
+                "loseGame" => $loseGame
             ];
         } else {
             $response = (object) [
