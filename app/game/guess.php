@@ -37,7 +37,7 @@ if (isset($_POST['guess'])) {
             $_SESSION['displayedWord'] = $displayedWord;
             $_SESSION['guessedLetters'][] = $guess;
 
-            if ($displayedWord === $word) {
+            if (strtolower(implode($displayedLetters)) === $word) {
                 $winGame = true;
             }
 

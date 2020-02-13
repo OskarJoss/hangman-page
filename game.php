@@ -16,10 +16,10 @@
     <?php endforeach; ?>
 </ul>
 
-<form class="guess-form" action="">
-    <input type="text" name="guess" maxlength="1" autofocus required>
-    <button type="submit">Guess</button>
-</form>
+<div>
+    <input class="guess-input" type="text" name="guess" maxlength="1" autofocus required>
+    <button class="guess-submit">Guess</button>
+</div>
 
 
 <?php require __DIR__ . '/views/footer.php'; ?>
