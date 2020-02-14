@@ -50,6 +50,7 @@ if (isset($_POST['guess'])) {
                 "isCorrectGuess" => $isCorrectGuess,
                 "displayedWord" => $displayedWord,
                 "guess" => strtoupper($guess),
+                "wrongLetters" => $_SESSION['wrongLetters'],
                 "winGame" => $winGame,
                 "loseGame" => $loseGame
             ];

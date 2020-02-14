@@ -46,3 +46,30 @@ function isValidLetter(string $letter): bool
 
     return true;
 }
+
+/**
+ * Get src for the hangman-img by counting items in wrongLetters array
+ *
+ * @param array $wrongLetters
+ * @return string
+ */
+function getImgSrc(array $wrongLetters): string
+{
+    $numberOfWrongGuesses = count($wrongLetters);
+    $imgArray = [
+        "/images/01.png",
+        "/images/02.png",
+        "/images/03.png",
+        "/images/04.png",
+        "/images/05.png",
+        "/images/06.png",
+        "/images/07.png",
+        "/images/08.png",
+        "/images/09.png",
+        "/images/10.png",
+        "/images/11.png",
+        "/images/12.png"
+    ];
+
+    return $imgArray[$numberOfWrongGuesses];
+}

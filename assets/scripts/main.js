@@ -4,6 +4,7 @@ const displayedWord = document.querySelector(".displayed-word");
 const input = document.querySelector(".guess-input");
 const submitBtn = document.querySelector(".guess-submit");
 const wrongLettersList = document.querySelector(".wrong-letters");
+const hangmanImg = document.querySelector(".hangman-img");
 
 const handleEvents = e => {
     if (e.type === "keydown") {
@@ -47,13 +48,13 @@ const handleResponse = response => {
     if (response.isValidResponse) {
         if (response.isCorrectGuess) {
             displayedWord.textContent = response.displayedWord;
-            console.log("win: " + response.winGame);
             if (response.winGame) {
                 winGame();
             }
         } else {
             li = createListElement(response.guess);
             wrongLettersList.appendChild(li);
+            hangmanImg.src = getImgSrc(response.wrongLetters);
             if (response.loseGame) {
                 loseGame();
             }
@@ -74,6 +75,26 @@ const createListElement = letter => {
     return li;
 };
 
+const getImgSrc = wrongLettersArray => {
+    const numberOfWrongGuesses = wrongLettersArray.length;
+    const imgArray = [
+        "/images/01.png",
+        "/images/02.png",
+        "/images/03.png",
+        "/images/04.png",
+        "/images/05.png",
+        "/images/06.png",
+        "/images/07.png",
+        "/images/08.png",
+        "/images/09.png",
+        "/images/10.png",
+        "/images/11.png",
+        "/images/12.png"
+    ];
+
+    return imgArray[numberOfWrongGuesses];
+};
+
 const winGame = () => {
     window.alert("CONGRATULATIONS");
 };
@@ -84,5 +105,3 @@ const loseGame = () => {
 
 input.addEventListener("keydown", handleEvents);
 submitBtn.addEventListener("click", handleEvents);
-
-// 13 enter

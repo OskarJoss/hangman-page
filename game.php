@@ -6,7 +6,7 @@
 
 <h1>Welcome to the game!</h1>
 
-<div class="img-container"><img src="https://images.unsplash.com/photo-1567589967685-d431540f735e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=808&q=80" alt=""></div>
+<div class="img-container"><img class="hangman-img" src="<?php echo getImgSrc($_SESSION['wrongLetters']); ?>" alt="hangman-image"></div>
 
 <h2 class="displayed-word"><?php echo $_SESSION['displayedWord']; ?></h2>
 
