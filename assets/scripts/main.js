@@ -49,14 +49,14 @@ const handleResponse = response => {
         if (response.isCorrectGuess) {
             displayedWord.textContent = response.displayedWord;
             if (response.winGame) {
-                winGame();
+                endGame("win");
             }
         } else {
             li = createListElement(response.guess);
             wrongLettersList.appendChild(li);
             hangmanImg.src = getImgSrc(response.wrongLetters);
             if (response.loseGame) {
-                loseGame();
+                endGame("lose");
             }
         }
     } else {
@@ -95,12 +95,25 @@ const getImgSrc = wrongLettersArray => {
     return imgArray[numberOfWrongGuesses];
 };
 
-const winGame = () => {
-    window.alert("CONGRATULATIONS");
-};
+const endGame = winOrLose => {
+    const endGameDiv = document.querySelector(".end-game-div");
+    const endGameHeader = document.querySelector(".end-game-h1");
+    const endGameText = document.querySelector(".end-game-p");
 
-const loseGame = () => {
-    window.alert("YOU LOSE!!!");
+    fetch("/app/game/endgame.php")
+        .then(response => response.json())
+        .then(response => {
+            if (winOrLose === "win") {
+                endGameHeader.textContent = "You Win!";
+                endGameText.textContent = "Congratulations!";
+            } else {
+                endGameHeader.textContent = "You Lose!";
+                endGameText.textContent = `The word was ${response.word}`;
+            }
+            setTimeout(() => {
+                endGameDiv.classList.remove("hidden");
+            }, 500);
+        });
 };
 
 input.addEventListener("keydown", handleEvents);

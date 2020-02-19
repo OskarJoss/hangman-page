@@ -21,5 +21,11 @@
     <button class="guess-submit">Guess</button>
 </div>
 
+<div class="end-game-div hidden">
+    <h1 class="end-game-h1"></h1>
+    <p class="end-game-p"></p>
+    <a href="/app/game/startgame.php"><button>Play Again</button></a>
+</div>
+
 
 <?php require __DIR__ . '/views/footer.php'; ?>

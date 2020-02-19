@@ -29,3 +29,19 @@ img {
     color: red;
     text-transform: uppercase;
 }
+
+.end-game-div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
