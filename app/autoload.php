@@ -22,5 +22,3 @@ $config = require __DIR__ . '/config.php';
 
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
-
-$wordList = new WordList($pdo);

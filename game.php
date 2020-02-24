@@ -2,7 +2,7 @@
 
 <?php if (!isset($_SESSION['displayedWord'])) redirect('/'); ?>
 
-<a href="/app/game/startgame.php"><button>New Game</button></a>
+<a href="/categories.php"><button>New Game</button></a>
 
 <h1>Welcome to the game!</h1>
 
@@ -24,7 +24,8 @@
 <div class="end-game-div hidden">
     <h1 class="end-game-h1"></h1>
     <p class="end-game-p"></p>
-    <a href="/app/game/startgame.php"><button>Play Again</button></a>
+    <a href="/app/game/startgame.php?category="><button class="replay-btn">Play Again</button></a>
+    <a href="/categories.php"><button>Choose category</button></a>
 </div>
 
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['guess'])) {
+    $wordList = new WordList($pdo, $_SESSION['category']);
     $guess = strtolower(trim(filter_var($_POST['guess'], FILTER_SANITIZE_STRING)));
     $word = strtolower($wordList->getWord((int) $_SESSION['wordId']));
     $displayedWord = $_SESSION['displayedWord'];

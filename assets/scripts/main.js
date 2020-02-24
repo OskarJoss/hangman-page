@@ -5,6 +5,7 @@ const input = document.querySelector(".guess-input");
 const submitBtn = document.querySelector(".guess-submit");
 const wrongLettersList = document.querySelector(".wrong-letters");
 const hangmanImg = document.querySelector(".hangman-img");
+const replayBtn = document.querySelector(".replay-btn");
 
 const handleEvents = e => {
     if (e.type === "keydown") {
@@ -99,6 +100,7 @@ const endGame = winOrLose => {
     const endGameDiv = document.querySelector(".end-game-div");
     const endGameHeader = document.querySelector(".end-game-h1");
     const endGameText = document.querySelector(".end-game-p");
+    const replayBtn = document.querySelector(".replay-btn");
 
     fetch("/app/game/endgame.php")
         .then(response => response.json())
@@ -110,6 +112,8 @@ const endGame = winOrLose => {
                 endGameHeader.textContent = "You Lose!";
                 endGameText.textContent = `The word was ${response.word}`;
             }
+            replayBtn.parentElement.href += response.category;
+
             setTimeout(() => {
                 endGameDiv.classList.remove("hidden");
             }, 500);

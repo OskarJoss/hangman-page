@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-
-
 class WordList extends Database implements WordListInterface
 {
-    public PDO $pdo;
+    protected PDO $pdo;
+    protected array $categories = ['star_wars', 'bands', 'words'];
+    protected string $table;
 
-    public function __construct(PDO $pdo)
+    public function __construct(PDO $pdo, int $category)
     {
         $this->pdo = $pdo;
+        $this->table = $this->categories[$category];
     }
 
     /**
@@ -21,10 +22,15 @@ class WordList extends Database implements WordListInterface
      */
     public function getWord(int $id): string
     {
-        $query = "SELECT * FROM words WHERE id = :id";
+        $query = "SELECT * FROM $this->table WHERE id = :id";
         $statement = $this->pdo->prepare($query);
+
+        if (!$statement) {
+            die(var_dump($this->pdo->errorInfo()));
+        }
+
         $statement->execute([
-            ':id' => $id
+            ':id' => $id,
         ]);
         $row = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -38,8 +44,11 @@ class WordList extends Database implements WordListInterface
      */
     public function getRandomRow(): array
     {
-        $query = "SELECT * FROM words ORDER BY RANDOM() LIMIT 1;";
-        $statement = $this->pdo->query($query);
+        $query = "SELECT * FROM $this->table ORDER BY RANDOM() LIMIT 1;";
+        $statement = $this->pdo->prepare($query);
+        if (!$statement) {
+            die(var_dump($this->pdo->errorInfo()));
+        }
         $statement->execute();
         $randomRow = $statement->fetch(PDO::FETCH_ASSOC);
 
