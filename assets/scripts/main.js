@@ -48,7 +48,7 @@ const handleGuess = guess => {
 const handleResponse = response => {
     if (response.isValidResponse) {
         if (response.isCorrectGuess) {
-            displayedWord.textContent = response.displayedWord;
+            displayedWord.innerHTML = response.displayedWord;
             if (response.winGame) {
                 endGame("win");
             }

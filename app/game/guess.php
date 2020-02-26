@@ -6,7 +6,7 @@ require __DIR__ . '/../autoload.php';
 if (isset($_POST['guess'])) {
     $wordList = new WordList($pdo, $_SESSION['category']);
     $guess = strtolower(trim(filter_var($_POST['guess'], FILTER_SANITIZE_STRING)));
-    $word = strtolower($wordList->getWord((int) $_SESSION['wordId']));
+    $word = strtolower($wordList->getWord($_SESSION['wordId']));
     $displayedWord = $_SESSION['displayedWord'];
     $letters = str_split($word);
     $displayedLetters = explode(" ", $displayedWord);
@@ -38,7 +38,7 @@ if (isset($_POST['guess'])) {
             $_SESSION['displayedWord'] = $displayedWord;
             $_SESSION['guessedLetters'][] = $guess;
 
-            if (strtolower(implode($displayedLetters)) === $word) {
+            if (strtolower(str_replace("&nbsp;", " ", implode($displayedLetters))) === $word) {
                 $winGame = true;
             }
 

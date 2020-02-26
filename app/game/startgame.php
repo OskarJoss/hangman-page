@@ -11,11 +11,18 @@ session_destroy();
 session_start();
 
 $wordList = new WordList($pdo, (int) $_GET['category']);
-
 $randomRow = $wordList->getRandomRow();
-$id = $randomRow['id'];
+$id = (int) $randomRow['id'];
 $word = $randomRow['word'];
-$displayedWord = implode(" ", array_fill(0, strlen($word), "_"));
+$displayedLetters = array_fill(0, strlen($word), "_");
+
+for ($i = 0; $i < strlen($word); $i++) {
+    if ($word[$i] === " ") {
+        $displayedLetters[$i] = "&nbsp;";
+    }
+}
+
+$displayedWord = implode(" ", $displayedLetters);
 
 $_SESSION['wordId'] = $id;
 $_SESSION['displayedWord'] = $displayedWord;
