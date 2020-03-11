@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
-<?php if (!isset($_SESSION['displayedWord'])) redirect('/'); ?>
+<?php if (!isset($_SESSION['displayedWord'])) {
+    redirect('/');
+} ?>
 
 <a href="/categories.php"><button>New Game</button></a>
 
